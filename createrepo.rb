@@ -5,8 +5,8 @@ class Createrepo < Formula
   url 'http://createrepo.baseurl.org/download/createrepo-0.4.11.tar.gz' 
   sha1 '10316e9ee98e92f961c727cf991589611a2de7cb'
 
-  depends_on 'stepanstipl/yum-metadata-parser'
-  depends_on 'stepanstipl/rpm4'
+  depends_on 'stepanstipl/noop/yum-metadata-parser'
+  depends_on 'stepanstipl/noop/rpm4'
   depends_on 'coreutils'
 
   def install
