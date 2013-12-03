@@ -12,8 +12,7 @@ class Createrepo < Formula
   def install
     
     inreplace ['bin/createrepo', 'bin/modifyrepo'], '/usr/share/createrepo', '/usr/local/share/createrepo'
-    inreplace ['dmd.py','dumpMetadata.py', 'genpkgmetadata.py', 'modifyrepo.py', 'readMetadata.py'], '/usr/bin/python', '/usr/bin/env python' 
-
+    inreplace ['dmd.py','dumpMetadata.py', 'genpkgmetadata.py', 'readMetadata.py'], '/usr/bin/python', '/usr/bin/env python' 
 
     system 'make', "prefix=#{prefix}", 'INSTALL=ginstall -p --verbose', 'install'
     
