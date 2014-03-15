@@ -32,9 +32,15 @@ Formulae in this tap:
 - _This one conflicts with default rpm_.
 - Version 4.11.1.
 
+Issues:
+-------
+Please use GitHub's issue tracker for reporting issues and eventually any suggestions etc. Please, please follow Homebrew's section Troubleshooting before you report any issue https://github.com/Homebrew/homebrew#troubleshooting.
+
+License:
+--------
+Released under [MIT License](https://github.com/stepanstipl/homebrew-noop/blob/master/LICENSE.md). Feel free to redistribute and contribute!
 
 Todo:
 -----
-- Add license
-- Add FAQ
-- Add some contact info & info about reporting issues
+- Add Travis CI tests
+- Maybe "Who are you?" section
