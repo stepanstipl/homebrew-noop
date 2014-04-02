@@ -1,4 +1,5 @@
 require 'formula'
+n -c 'import sys;print(sys.version[:3])'
 
 class Rpm4 < Formula
   homepage 'http://www.rpm.org/'
@@ -22,17 +23,24 @@ class Rpm4 < Formula
   end
 
   def install
+    # Fix for removed python. stuff... Argh!
+    pyvers = "python" + %x(python -c 'import sys;print(sys.version[:3])').chomp
+    pypref = %x(python-config --prefix).chomp
+    pyincdir = "#{pypref}/include/#{pyvers}"
+    pylibdir = "#{pypref}/lib/lib#{pyvers}.dylib"
+    pybin = "#{pypref}/bin/python"
+
     # some of nss/nspr formulae might be keg-only:
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nss').include}/nss"
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nspr').include}/nspr"
 
-    ENV.append 'LDFLAGS', "-L#{python.libdir}"
+    ENV.append 'LDFLAGS', "-L#{pylibdir}"
 
     # pkg-config support was removed from lua 5.2:
     ENV['LUA_CFLAGS'] = "-I#{HOMEBREW_PREFIX}/include"
     ENV['LUA_LIBS'] = "-L#{HOMEBREW_PREFIX}/lib -llua"
    
-    ENV['__PYTHON'] = python.binary
+    ENV['__PYTHON'] = $pybin
     
     args = %W[
       --disable-dependency-tracking
