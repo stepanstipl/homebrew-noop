@@ -11,9 +11,13 @@ class YumMetadataParser < Formula
   depends_on :python
 
   def install
+    # Fix for removed python. stuff... Argh!
+    pyvers = "python" + %x(python -c 'import sys;print(sys.version[:3])').chomp
+    pypref = %x(python-config --prefix).chomp
+    pybin = "#{pypref}/bin/python"
     
-    system python, 'setup.py', 'build'
-    system python, 'setup.py', 'install', "--prefix=#{prefix}"
+    system pybin, 'setup.py', 'build'
+    system pybin, 'setup.py', 'install', "--prefix=#{prefix}"
     
   end
 end
