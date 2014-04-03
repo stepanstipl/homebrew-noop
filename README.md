@@ -36,6 +36,8 @@ Issues:
 -------
 Please use GitHub's issue tracker for reporting issues and eventually any suggestions etc. Please, please follow Homebrew's section Troubleshooting before you report any issue https://github.com/Homebrew/homebrew#troubleshooting.
 
+sqlite3 needs to be installed and **linked**, else pkg-config fails and makes whole python setup.py build step to fail
+
 License:
 --------
 Released under [MIT License](https://github.com/stepanstipl/homebrew-noop/blob/master/LICENSE.md). Feel free to redistribute and contribute!
