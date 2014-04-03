@@ -1,5 +1,4 @@
 require 'formula'
-n -c 'import sys;print(sys.version[:3])'
 
 class Rpm4 < Formula
   homepage 'http://www.rpm.org/'
