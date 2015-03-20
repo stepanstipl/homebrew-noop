@@ -30,7 +30,7 @@ Formulae in this tap:
 ### rpm4 (http://www.rpm.org/)
 - Classical rpm tool - version 4, version used by main Linux distributions like RHEL, CentOS and Fedora (default one in Homebrew is rpm5, but that one does not have python bindings required by createrepo).
 - _This one conflicts with default rpm_.
-- Version 4.11.1.
+- Version 4.12.0.1
 
 Issues:
 -------
