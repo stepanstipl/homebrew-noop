@@ -2,8 +2,8 @@ require 'formula'
 
 class Rpm4 < Formula
   homepage 'http://www.rpm.org/'
-  url 'http://rpm.org/releases/rpm-4.11.x/rpm-4.11.1.tar.bz2'
-  sha1 '31ddc4185137ce3f718c99e91dcb040614fe820c'
+  url 'http://rpm.org/releases/rpm-4.12.x/rpm-4.12.0.1.tar.bz2'
+  sha1 'd416bdb249b246b00b2d5d34c66e7f5a68a62524'
 
   depends_on 'pkg-config' => :build
   depends_on 'nss'
@@ -13,6 +13,7 @@ class Rpm4 < Formula
   depends_on 'lua'
   depends_on 'berkeley-db'
   depends_on 'xz'
+  depends_on 'libarchive'
   depends_on :python
 
   conflicts_with 'rpm', :because => 'These are two different forks of the same tool.'
@@ -116,7 +117,36 @@ index f3b1bab..bf264f5 100644
  #else
  extern char ** environ;
  #endif /* __APPLE__ */
-@@ -116,10 +117,10 @@ typedef	char * security_context_t;
+diff --git a/lib/header.c b/lib/header.c
+index f78ba78..8b2701e 100644
+--- a/lib/header.c
++++ b/lib/header.c
+@@ -107,19 +107,6 @@ static const size_t headerMaxbytes = (32*1024*1024);
+    (((_e)->info.tag >= RPMTAG_HEADERIMAGE) && ((_e)->info.tag < RPMTAG_HEADERREGIONS))
+ #define    ENTRY_IN_REGION(_e) ((_e)->info.offset < 0)
+ 
+-/* Convert a 64bit value to network byte order. */
+-RPM_GNUC_CONST
+-static uint64_t htonll(uint64_t n)
+-{
+-#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+-    uint32_t *i = (uint32_t*)&n;
+-    uint32_t b = i[0];
+-    i[0] = htonl(i[1]);
+-    i[1] = htonl(b);
+-#endif
+-    return n;
+-}
+-
+ Header headerLink(Header h)
+ {
+     if (h != NULL)
+
+diff --git a/system.h b/system.h
+index 3be8856..e39531c 100644
+--- a/system.h
++++ b/system.h
+@@ -92,10 +92,10 @@ char * stpncpy(char * dest, const char * src, size_t n);
  #if __GLIBC_MINOR__ >= 1
  #define	__progname	__assert_program_name
  #endif
@@ -129,3 +159,4 @@ index f3b1bab..bf264f5 100644
    { if ((__progname = strrchr(pn, '/')) != NULL) __progname++; \
      else __progname = pn;		\
    }
+
