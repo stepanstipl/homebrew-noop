@@ -8,10 +8,11 @@ class Createrepo < Formula
   depends_on 'stepanstipl/noop/yum-metadata-parser'
   depends_on 'stepanstipl/noop/rpm4'
   depends_on 'coreutils'
+  depends_on 'libxml2' => "with-python"
 
   def install
     
-    inreplace ['bin/createrepo', 'bin/modifyrepo'], '/usr/share/createrepo', '/usr/local/share/createrepo'
+    inreplace ['bin/createrepo', 'bin/modifyrepo'], '/usr/share/createrepo', "#{HOMEBREW_PREFIX}/share/createrepo"
     inreplace ['dmd.py','dumpMetadata.py', 'genpkgmetadata.py', 'readMetadata.py'], '/usr/bin/python', '/usr/bin/env python' 
 
     system 'make', "prefix=#{prefix}", 'INSTALL=ginstall -p --verbose', 'install'

@@ -10,7 +10,7 @@ class Rpm4 < Formula
   depends_on 'nspr'
   depends_on 'libmagic'
   depends_on 'popt'
-  depends_on 'lua'
+  depends_on 'lua51'
   depends_on 'berkeley-db'
   depends_on 'xz'
   depends_on 'libarchive'
@@ -34,11 +34,11 @@ class Rpm4 < Formula
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nss').include}/nss"
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nspr').include}/nspr"
 
-    ENV.append 'LDFLAGS', "-L#{pylibdir}"
+    ENV.append 'LDFLAGS', %x(python-config --ldflags) 
 
     # pkg-config support was removed from lua 5.2:
-    ENV['LUA_CFLAGS'] = "-I#{HOMEBREW_PREFIX}/include"
-    ENV['LUA_LIBS'] = "-L#{HOMEBREW_PREFIX}/lib -llua"
+    ENV['LUA_CFLAGS'] = "-I#{HOMEBREW_PREFIX}/include/lua5.1"
+    ENV['LUA_LIBS'] = "-L#{HOMEBREW_PREFIX}/lib -llua5.1"
    
     ENV['__PYTHON'] = $pybin
     
