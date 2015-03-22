@@ -18,4 +18,17 @@ class Createrepo < Formula
     system 'make', "prefix=#{prefix}", 'INSTALL=ginstall -p --verbose', 'install'
     
   end
+
+  def caveats
+    homebrew_site_packages = Language::Python.homebrew_site_packages
+    keg_site_packages = "#{Formula["libxml2"].opt_prefix}/lib/python2.7/site-packages"
+    msg = <<-EOS.undent
+      Please make sure python can find libxml2 module.
+      There's couple of ways to achieve that, libxml2 module should give you
+      relevant hint when installing. One of the ways that might work for you:
+        echo #{keg_site_packages} >> #{homebrew_site_packages}/libxml2.pth
+    EOS
+    msg
+  end
+
 end
