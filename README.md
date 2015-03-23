@@ -21,7 +21,7 @@ Formulae in this tap:
 - Createrepo tool for generating rpm repositories metadata.
 - Latest stable version 0.4.11.
 - Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
-  `echo /opt/boxen/homebrew/opt/libxml2/lib/python2.7/site-packages >> /opt/boxen/homebrew/lib/python2.7/site-packages/libxml2.pth`
+  `echo $(brew --prefix)/opt/libxml2/lib/python2.7/site-packages >> $(brew --prefix)/lib/python2.7/site-packages/libxml2.pth`
 
 ### yum-metadata-parser (http://yum.baseurl.org/)
 - Fast yum metadata parser in C. Dependency for createrepo. 
@@ -43,7 +43,7 @@ Please use GitHub's issue tracker for reporting issues and eventually any sugges
 
 - sqlite3 needs to be installed and **linked**, else pkg-config fails and makes whole python setup.py build step to fail
 - Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
-  `echo /opt/boxen/homebrew/opt/libxml2/lib/python2.7/site-packages >> /opt/boxen/homebrew/lib/python2.7/site-packages/libxml2.pth`
+  `echo $(brew --prefix)/opt/libxml2/lib/python2.7/site-packages >> $(brew --prefix)/lib/python2.7/site-packages/libxml2.pth`
 
 License:
 --------
