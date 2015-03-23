@@ -20,8 +20,8 @@ Formulae in this tap:
 ### createrepo (http://createrepo.baseurl.org/)
 - Createrepo tool for generating rpm repositories metadata.
 - Latest stable version 0.4.11.
-- _Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
-  `echo /opt/boxen/homebrew/opt/libxml2/lib/python2.7/site-packages >> /opt/boxen/homebrew/lib/python2.7/site-packages/libxml2.pth`_
+- Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
+  `echo /opt/boxen/homebrew/opt/libxml2/lib/python2.7/site-packages >> /opt/boxen/homebrew/lib/python2.7/site-packages/libxml2.pth`
 
 ### yum-metadata-parser (http://yum.baseurl.org/)
 - Fast yum metadata parser in C. Dependency for createrepo. 
@@ -33,11 +33,17 @@ Formulae in this tap:
 - _This one conflicts with default rpm_.
 - Version 4.12.0.1
 
+### rpmlint (http://sourceforge.net/projects/rpmlint/)
+- Tool for checking common errors in rpm packages.
+- Version 1.6.
+
 Issues:
 -------
 Please use GitHub's issue tracker for reporting issues and eventually any suggestions etc. Please, please follow Homebrew's section Troubleshooting before you report any issue https://github.com/Homebrew/homebrew#troubleshooting.
 
-sqlite3 needs to be installed and **linked**, else pkg-config fails and makes whole python setup.py build step to fail
+- sqlite3 needs to be installed and **linked**, else pkg-config fails and makes whole python setup.py build step to fail
+- Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
+  `echo /opt/boxen/homebrew/opt/libxml2/lib/python2.7/site-packages >> /opt/boxen/homebrew/lib/python2.7/site-packages/libxml2.pth`
 
 License:
 --------
@@ -47,3 +53,6 @@ Todo:
 -----
 - Add Travis CI tests
 - Maybe "Who are you?" section
+- Tests in Vagrant
+- Make sure this works both with boxen and just homebrew (ie. hombrew in different paths) 
+- See about homebrew python vs. system
