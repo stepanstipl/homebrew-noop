@@ -32,7 +32,7 @@ Formulae in this tap:
 - _This one conflicts with default rpm_.
 - Version 4.12.0.1
 - If you're using system Python, make sure Homebre's site-packages are added to your Python sys.path:
-  - `mkdir -p /Users/vagrant/Library/Python/2.7/lib/python/site-packages`
+  - `mkdir -p /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages`
   - `echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages/homebrew.pth`
 
 ### rpmlint (http://sourceforge.net/projects/rpmlint/)
