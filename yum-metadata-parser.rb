@@ -1,5 +1,6 @@
 require 'formula'
 
+# Main class describing formula
 class YumMetadataParser < Formula
   homepage 'http://yum.baseurl.org/'
   url 'http://yum.baseurl.org/download/yum-metadata-parser/yum-metadata-parser-1.1.4.tar.gz'
@@ -12,12 +13,10 @@ class YumMetadataParser < Formula
 
   def install
     # Fix for removed python. stuff... Argh!
-    pyvers = "python" + %x(python -c 'import sys;print(sys.version[:3])').chomp
-    pypref = %x(python-config --prefix).chomp
+    pypref = `python-config --prefix`.chomp
     pybin = "#{pypref}/bin/python"
-    
+
     system pybin, 'setup.py', 'build'
     system pybin, 'setup.py', 'install', "--prefix=#{prefix}"
-    
   end
 end

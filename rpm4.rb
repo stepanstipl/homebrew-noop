@@ -1,5 +1,6 @@
 require 'formula'
 
+# Main class describing formula
 class Rpm4 < Formula
   homepage 'http://www.rpm.org/'
   url 'http://rpm.org/releases/rpm-4.12.x/rpm-4.12.0.1.tar.bz2'
@@ -16,7 +17,7 @@ class Rpm4 < Formula
   depends_on 'libarchive'
   depends_on :python
 
-  conflicts_with 'rpm', :because => 'These are two different forks of the same tool.'
+  conflicts_with 'rpm', because: 'These are two different forks of the same tool.'
 
   def patches
     DATA
@@ -24,25 +25,21 @@ class Rpm4 < Formula
 
   def install
     # Fix for removed python. stuff... Argh!
-    pyvers = "python" + %x(python -c 'import sys;print(sys.version[:3])').chomp
-    pypref = %x(python-config --prefix).chomp
-    pyincdir = "#{pypref}/include/#{pyvers}"
-    pylibdir = "#{pypref}/lib/lib#{pyvers}.dylib"
+    pypref = `python-config --prefix`.chomp
     pybin = "#{pypref}/bin/python"
 
     # some of nss/nspr formulae might be keg-only:
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nss').include}/nss"
     ENV.append 'CPPFLAGS', "-I#{Formula.factory('nspr').include}/nspr"
-
-    ENV.append 'LDFLAGS', %x(python-config --ldflags) 
+    ENV.append 'LDFLAGS', `python-config --ldflags`
 
     # pkg-config support was removed from lua 5.2:
     ENV['LUA_CFLAGS'] = "-I#{HOMEBREW_PREFIX}/include/lua5.1"
     ENV['LUA_LIBS'] = "-L#{HOMEBREW_PREFIX}/lib -llua5.1"
-   
-    ENV['__PYTHON'] = $pybin
-    
-    args = %W[
+
+    ENV['__PYTHON'] = pybin
+
+    args = %W(
       --disable-dependency-tracking
       --prefix=#{prefix}
       --sysconfdir=#{HOMEBREW_PREFIX}/etc
@@ -50,16 +47,15 @@ class Rpm4 < Formula
       --with-external-db
       --with-lua
       --without-hackingdocs
-      --enable-python
-    ]
+      --enable-python)
     system './configure', *args
-    system "make"
-    system "make install"
-    
+    system 'make'
+    system 'make install'
+
     # the default install makes /usr/bin/rpmquery a symlink to /bin/rpm
     # by using ../.. but that doesn't really work with any other prefix.
-    ln_sf "rpm", "#{bin}/rpmquery"
-    ln_sf "rpm", "#{bin}/rpmverify"
+    ln_sf 'rpm', "#{bin}/rpmquery"
+    ln_sf 'rpm', "#{bin}/rpmverify"
   end
 end
 
@@ -71,10 +67,10 @@ index 541e8c4..5cecc2a 100644
 @@ -244,7 +244,7 @@ rpmcliInit(int argc, char *const argv[], struct poptOption * optionsTable)
      int rc;
      const char *ctx, *execPath;
- 
+
 -    setprogname(argv[0]);       /* Retrofit glibc __progname */
 +    xsetprogname(argv[0]);       /* Retrofit glibc __progname */
- 
+
      /* XXX glibc churn sanity */
      if (__progname == NULL) {
 diff --git a/rpm2cpio.c b/rpm2cpio.c
@@ -84,18 +80,18 @@ index 89ebdfa..f35c7c8 100644
 @@ -21,7 +21,7 @@ int main(int argc, char *argv[])
      off_t payload_size;
      FD_t gzdi;
-     
+
 -    setprogname(argv[0]);	/* Retrofit glibc __progname */
 +    xsetprogname(argv[0]);	/* Retrofit glibc __progname */
      rpmReadConfigFiles(NULL, NULL);
      if (argc == 1)
- 	fdi = fdDup(STDIN_FILENO);
+   fdi = fdDup(STDIN_FILENO);
 diff --git a/rpmqv.c b/rpmqv.c
 index da5f2ca..d033d21 100644
 --- a/rpmqv.c
 +++ b/rpmqv.c
 @@ -92,8 +92,8 @@ int main(int argc, char *argv[])
- 
+
      /* Set the major mode based on argv[0] */
  #ifdef	IAM_RPMQV
 -    if (rstreq(__progname, "rpmquery"))	bigMode = MODE_QUERY;
@@ -103,7 +99,7 @@ index da5f2ca..d033d21 100644
 +    if (rstreq(__progname ? __progname : "", "rpmquery"))	bigMode = MODE_QUERY;
 +    if (rstreq(__progname ? __progname : "", "rpmverify")) bigMode = MODE_VERIFY;
  #endif
- 
+
  #if defined(IAM_RPMQV)
 diff --git a/system.h b/system.h
 index f3b1bab..bf264f5 100644
@@ -124,7 +120,7 @@ index f78ba78..8b2701e 100644
 @@ -107,19 +107,6 @@ static const size_t headerMaxbytes = (32*1024*1024);
     (((_e)->info.tag >= RPMTAG_HEADERIMAGE) && ((_e)->info.tag < RPMTAG_HEADERREGIONS))
  #define    ENTRY_IN_REGION(_e) ((_e)->info.offset < 0)
- 
+
 -/* Convert a 64bit value to network byte order. */
 -RPM_GNUC_CONST
 -static uint64_t htonll(uint64_t n)
@@ -159,4 +155,3 @@ index 3be8856..e39531c 100644
    { if ((__progname = strrchr(pn, '/')) != NULL) __progname++; \
      else __progname = pn;		\
    }
-

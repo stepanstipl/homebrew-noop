@@ -1,0 +1,4 @@
+# Ignore Vagrant files
+.vagrant/*
+
+Gemfile.lock
