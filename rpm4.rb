@@ -67,10 +67,10 @@ index 541e8c4..5cecc2a 100644
 @@ -244,7 +244,7 @@ rpmcliInit(int argc, char *const argv[], struct poptOption * optionsTable)
      int rc;
      const char *ctx, *execPath;
-
+ 
 -    setprogname(argv[0]);       /* Retrofit glibc __progname */
 +    xsetprogname(argv[0]);       /* Retrofit glibc __progname */
-
+ 
      /* XXX glibc churn sanity */
      if (__progname == NULL) {
 diff --git a/rpm2cpio.c b/rpm2cpio.c
@@ -80,18 +80,18 @@ index 89ebdfa..f35c7c8 100644
 @@ -21,7 +21,7 @@ int main(int argc, char *argv[])
      off_t payload_size;
      FD_t gzdi;
-
+     
 -    setprogname(argv[0]);	/* Retrofit glibc __progname */
 +    xsetprogname(argv[0]);	/* Retrofit glibc __progname */
      rpmReadConfigFiles(NULL, NULL);
      if (argc == 1)
-   fdi = fdDup(STDIN_FILENO);
+ 	fdi = fdDup(STDIN_FILENO);
 diff --git a/rpmqv.c b/rpmqv.c
 index da5f2ca..d033d21 100644
 --- a/rpmqv.c
 +++ b/rpmqv.c
 @@ -92,8 +92,8 @@ int main(int argc, char *argv[])
-
+ 
      /* Set the major mode based on argv[0] */
  #ifdef	IAM_RPMQV
 -    if (rstreq(__progname, "rpmquery"))	bigMode = MODE_QUERY;
@@ -99,7 +99,7 @@ index da5f2ca..d033d21 100644
 +    if (rstreq(__progname ? __progname : "", "rpmquery"))	bigMode = MODE_QUERY;
 +    if (rstreq(__progname ? __progname : "", "rpmverify")) bigMode = MODE_VERIFY;
  #endif
-
+ 
  #if defined(IAM_RPMQV)
 diff --git a/system.h b/system.h
 index f3b1bab..bf264f5 100644
@@ -120,7 +120,7 @@ index f78ba78..8b2701e 100644
 @@ -107,19 +107,6 @@ static const size_t headerMaxbytes = (32*1024*1024);
     (((_e)->info.tag >= RPMTAG_HEADERIMAGE) && ((_e)->info.tag < RPMTAG_HEADERREGIONS))
  #define    ENTRY_IN_REGION(_e) ((_e)->info.offset < 0)
-
+ 
 -/* Convert a 64bit value to network byte order. */
 -RPM_GNUC_CONST
 -static uint64_t htonll(uint64_t n)
@@ -155,3 +155,4 @@ index 3be8856..e39531c 100644
    { if ((__progname = strrchr(pn, '/')) != NULL) __progname++; \
      else __progname = pn;		\
    }
+

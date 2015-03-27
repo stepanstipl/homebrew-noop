@@ -20,30 +20,36 @@ Formulae in this tap:
 ### createrepo (http://createrepo.baseurl.org/)
 - Createrepo tool for generating rpm repositories metadata.
 - Latest stable version 0.4.11.
-- Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
-  `echo $(brew --prefix)/opt/libxml2/lib/python2.7/site-packages >> $(brew --prefix)/lib/python2.7/site-packages/libxml2.pth`
+- After installing libxml2, make sure it's symlinked to /usr/local:
+  - `echo /usr/local/opt/libxml2/lib/python2.7/site-packages >> /usr/local/lib/python2.7/site-packages/libxml2.pth`
 
 ### yum-metadata-parser (http://yum.baseurl.org/)
 - Fast yum metadata parser in C. Dependency for createrepo. 
 - Version 1.1.4.
 
-
 ### rpm4 (http://www.rpm.org/)
 - Classical rpm tool - version 4, version used by main Linux distributions like RHEL, CentOS and Fedora (default one in Homebrew is rpm5, but that one does not have python bindings required by createrepo).
 - _This one conflicts with default rpm_.
 - Version 4.12.0.1
+- If you're using system Python, make sure Homebre's site-packages are added to your Python sys.path:
+  - `mkdir -p /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages`
+  - `echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages/homebrew.pth`
 
 ### rpmlint (http://sourceforge.net/projects/rpmlint/)
 - Tool for checking common errors in rpm packages.
 - Version 1.6.
 
+Caveats:
+--------
+- If you're using system Python, make sure Homebrew's site-packages are added to your Python sys.path:
+  - `mkdir -p /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages`
+  - `echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages/homebrew.pth`
+- After installing libxml2, make sure it's symlinked to /usr/local:
+  - `echo /usr/local/opt/libxml2/lib/python2.7/site-packages >> /usr/local/lib/python2.7/site-packages/libxml2.pth`
+
 Issues:
 -------
 Please use GitHub's issue tracker for reporting issues and eventually any suggestions etc. Please, please follow Homebrew's section Troubleshooting before you report any issue https://github.com/Homebrew/homebrew#troubleshooting.
-
-- sqlite3 needs to be installed and **linked**, else pkg-config fails and makes whole python setup.py build step to fail
-- Please make sure python can find libxml2 module. There's couple of ways to achieve that, libxml2 module should give you relevant hint when installing. One of the ways that might work for you:
-  `echo $(brew --prefix)/opt/libxml2/lib/python2.7/site-packages >> $(brew --prefix)/lib/python2.7/site-packages/libxml2.pth`
 
 License:
 --------
@@ -54,5 +60,4 @@ Todo:
 - Add Travis CI tests
 - Maybe "Who are you?" section
 - Tests in Vagrant
-- Make sure this works both with boxen and just homebrew (ie. hombrew in different paths) 
 - See about homebrew python vs. system
