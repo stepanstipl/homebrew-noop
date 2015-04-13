@@ -59,6 +59,7 @@ class Rpm4 < Formula
   end
 end
 
+# rubocop:disable Style/TrailingWhitespace, Style/Tab
 __END__
 diff --git a/lib/poptALL.c b/lib/poptALL.c
 index 541e8c4..5cecc2a 100644
@@ -155,4 +156,3 @@ index 3be8856..e39531c 100644
    { if ((__progname = strrchr(pn, '/')) != NULL) __progname++; \
      else __progname = pn;		\
    }
-
