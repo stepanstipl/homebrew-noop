@@ -1,6 +1,7 @@
 stepanstipl/noop
 =============
 
+**This repo is not maintained anymore, I would recommend using docker for rpm related stuff, for example `stepanstipl/centos7-rpm-devtools` image.**
 
 _Stepan's personal tap for homebrew formulae_
 
