@@ -4,7 +4,7 @@ require 'formula'
 class YumMetadataParser < Formula
   homepage 'http://yum.baseurl.org/'
   url 'http://yum.baseurl.org/download/yum-metadata-parser/yum-metadata-parser-1.1.4.tar.gz'
-  sha1 '044e69a04ea5ac39d79020d9e1f1a35c9dc64d9b'
+  sha256 'f1560a284541feb720c3ae35b6b31f80c2be5cb9ca86b3a1ee9459846f821ada'
 
   depends_on 'pkg-config' => :build
   depends_on 'glib'

@@ -4,7 +4,7 @@ require 'formula'
 class Createrepo < Formula
   homepage 'http://createrepo.baseurl.org//'
   url 'http://createrepo.baseurl.org/download/createrepo-0.4.11.tar.gz'
-  sha1 '10316e9ee98e92f961c727cf991589611a2de7cb'
+  sha256 'a73ae11a0dcde8bde36d900bc3f7f8f1083ba752c70a5c61b72d1e1e7608f21b'
 
   depends_on 'stepanstipl/noop/yum-metadata-parser'
   depends_on 'stepanstipl/noop/rpm4'
