@@ -3,8 +3,8 @@ require 'formula'
 # Main class describing formula
 class Rpm4 < Formula
   homepage 'http://www.rpm.org/'
-  url 'http://rpm.org/releases/rpm-4.12.x/rpm-4.12.0.1.tar.bz2'
-  sha1 'd416bdb249b246b00b2d5d34c66e7f5a68a62524'
+  url 'http://github.com/rpm-software-management/rpm/releases/download/rpm-4.13.0-release/rpm-4.13.0.tar.bz2'
+  sha256 '221166b61584721a8ca979d7d8576078a5dadaf09a44208f69cc1b353240ba1b'
 
   depends_on 'pkg-config' => :build
   depends_on 'nss'
