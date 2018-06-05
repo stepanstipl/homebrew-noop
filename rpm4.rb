@@ -15,7 +15,7 @@ class Rpm4 < Formula
   depends_on 'berkeley-db'
   depends_on 'xz'
   depends_on 'libarchive'
-  depends_on :python
+  depends_on "python@2"
 
   conflicts_with 'rpm', because: 'These are two different forks of the same tool.'
 

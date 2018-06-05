@@ -7,7 +7,7 @@ class Rpmlint < Formula
   sha256 'a0dae71a3fed413ee5c47bd04f393cd6598c68c0dcf1504fa020d62814ff674b'
 
   depends_on 'stepanstipl/noop/rpm4'
-  depends_on :python
+  depends_on "python@2"
   depends_on 'libmagic' => [:recommended, 'with-python']
   depends_on 'enchant' => [:recommended, 'with-python']
   depends_on 'xz'
