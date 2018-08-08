@@ -31,7 +31,7 @@ Formulae in this tap:
 ### rpm4 (http://www.rpm.org/)
 - Classical rpm tool - version 4, version used by main Linux distributions like RHEL, CentOS and Fedora (default one in Homebrew is rpm5, but that one does not have python bindings required by createrepo).
 - _This one conflicts with default rpm_.
-- Version 4.13.0
+- Version 4.14.1
 - If you're using system Python, make sure Homebre's site-packages are added to your Python sys.path:
   - `mkdir -p /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages`
   - `echo 'import site; site.addsitedir("/usr/local/lib/python2.7/site-packages")' >> /Users/$(whoami)/Library/Python/2.7/lib/python/site-packages/homebrew.pth`
